@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Soothing Experience</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Fira Mono', monospace; /* Fira Mono font */
+            background-color: #212121; /* Dark gray background color */
+            padding-top: 100px;
+            color: #fff; /* White text color */
+            letter-spacing: 3px; /* Increase letter spacing */
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        /* Styling for the image button */
+        .button {
+            display: inline-block;
+            cursor: pointer;
+        }
+        .button img {
+            width: 300px; /* 50% larger than original size */
+            height: auto;
+            transition: transform 0.3s ease; /* Smooth transition for scale */
+        }
+        .button:hover img {
+            transform: scale(0.95); /* Scale down slightly on hover */
+        }
+        .hidden {
+            display: none;
+        }
+        .link {
+            display: none;
+            color: #fff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        .link:hover {
+            text-decoration: none;
+        }
+        h1 {
+            font-weight: 300; /* Lighter font weight */
+            font-style: normal; /* Normal font style */
+        }
+
+        /* Keyframes for vibration effect */
+        @keyframes shake {
+            0% { transform: translate(0px, 0px) rotate(0deg); }
+            10% { transform: translate(-2.5px, -2.5px) rotate(-2.5deg); }
+            20% { transform: translate(2.5px, 2.5px) rotate(2.5deg); }
+            30% { transform: translate(-2.5px, -2.5px) rotate(-2.5deg); }
+            40% { transform: translate(2.5px, 2.5px) rotate(2.5deg); }
+            50% { transform: translate(-2.5px, -2.5px) rotate(-2.5deg); }
+            60% { transform: translate(2.5px, 2.5px) rotate(2.5deg); }
+            70% { transform: translate(-2.5px, -2.5px) rotate(-2.5deg); }
+            80% { transform: translate(2.5px, 2.5px) rotate(2.5deg); }
+            90% { transform: translate(-2.5px, -2.5px) rotate(-2.5deg); }
+            100% { transform: translate(0px, 0px) rotate(0deg); }
+        }
+
+        /* Apply animation to main image only on hover */
+        #imageContainer {
+            overflow: hidden; /* Hide any overflow from the main image */
+            display: inline-block; /* Ensure it wraps around the image */
+        }
+        #mainImage {
+            width: 100%; /* Ensure image fills its container */
+            height: auto;
+            animation: none; /* Initially no animation */
+        }
+        #mainImage:hover {
+            animation: shake 0.5s infinite linear; /* Apply the shake animation on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 id="title">Welcome to A Soothing Experience</h1>
+        <p id="startText">Click below to begin</p>
+        <!-- Replace the button with an image -->
+        <div class="button" onclick="startExperience()">
+            <img src="Curel_DH.png" alt="Start Button"> <!-- Replace with your PNG image path -->
+        </div>
+        <div id="experience" class="hidden">
+            <div id="imageContainer">
+                <img src="OH.jpg" id="mainImage" alt="Main Image" class="hidden">
+            </div>
+            <audio id="mainAudio" src="MYDICK.mp3" preload="auto"></audio> <!-- Replace with your main audio file path -->
+            <audio id="bgmAudio" src="bgm.mp3" preload="auto"></audio> <!-- Replace with your background music file path -->
+        </div>
+        <p id="returnLink" class="link" onclick="returnToOriginal()">Continue shopping?</p>
+    </div>
+
+    <script>
+        function startExperience() {
+            // Change the title immediately
+            document.getElementById('title').textContent = "WHAT THE HELL IS HAPPENING!?";
+
+            // Hide the start text and button
+            document.getElementById('startText').style.display = 'none';
+            document.querySelector('.button').style.display = 'none';
+
+            // Show the main image and play the main audio
+            var mainImage = document.getElementById('mainImage');
+            mainImage.classList.remove('hidden');
+
+            var mainAudio = document.getElementById('mainAudio');
+            mainAudio.play();
+
+            // Play the background music simultaneously
+            var bgmAudio = document.getElementById('bgmAudio');
+            bgmAudio.play();
+
+            // When main audio ends, show the return link
+            mainAudio.onended = function() {
+                document.getElementById('returnLink').style.display = 'block';
+            };
+
+            // Show the main image and audio elements
+            document.getElementById('experience').classList.remove('hidden');
+        }
+
+        function returnToOriginal() {
+            // Reset everything to the original state
+            document.getElementById('title').textContent = "Welcome to a Soothing Experience";
+            document.getElementById('title').style.display = 'block';
+            document.getElementById('startText').style.display = 'block';
+            document.querySelector('.button').style.display = 'inline-block';
+            document.getElementById('mainImage').classList.add('hidden');
+            document.getElementById('mainAudio').pause();
+            document.getElementById('mainAudio').currentTime = 0;
+            document.getElementById('bgmAudio').pause();
+            document.getElementById('bgmAudio').currentTime = 0;
+            document.getElementById('experience').classList.add('hidden'); // Hide the experience div
+            document.getElementById('returnLink').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
